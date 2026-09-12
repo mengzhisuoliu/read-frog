@@ -1,5 +1,65 @@
 # @read-frog/extension
 
+## 1.47.0
+
+### Minor Changes
+
+- [#2171](https://github.com/mengxi-ream/read-frog/pull/2171) [`0f537ad`](https://github.com/mengxi-ream/read-frog/commit/0f537ad0ec2ec83edf23ad49b357c13250fe567a) Thanks [@ananaBMaster](https://github.com/ananaBMaster)! - feat(glossary): add user-defined glossaries
+
+  Define a term once and every AI translation uses your wording. Leave a term's translation empty to keep it
+  in the original language, which is usually what names and usernames need. Only the terms that actually
+  appear in a paragraph are sent to the model, so a large glossary costs nothing on pages that do not use it.
+
+  Terms live in glossaries, and each glossary can be limited to the websites you want it on — a set of game
+  terms on one wiki, work vocabulary on your company's docs, nothing anywhere else. A glossary with no
+  website listed applies everywhere. Where two glossaries give the same term different wording, the one
+  lower in the list wins.
+
+  Each term is written for one target language, chosen next to the term itself and defaulting to whatever
+  you currently translate into, so the same word can have a Chinese wording and a Japanese one side by side
+  and only the one that applies is ever sent.
+
+  Turn an individual term or a whole glossary off without deleting it, import and export each list as CSV
+  (now with a `targetLanguage` column; two-column files still import), or empty it in one go. Importing with
+  Replace asks for confirmation first, because it clears the glossary in every target language, not just the
+  one you picked. Find it under Advanced → Glossary in the extension settings.
+
+### Patch Changes
+
+- [#2175](https://github.com/mengxi-ream/read-frog/pull/2175) [`1cf3e5f`](https://github.com/mengxi-ream/read-frog/commit/1cf3e5fa48741dc38f8aab7c08853bded426214c) Thanks [@ananaBMaster](https://github.com/ananaBMaster)! - fix(glossary): correct term matching, CSV round-tripping, and the term counter
+
+  A term is no longer skipped when a longer term starts at the same place and does not
+  apply there. `Chort` was lost in "landed at Chort bayonet" because `Chort Bay` matched
+  first and then failed at its edge — while the same term still worked in other sentences,
+  which made it hard to notice.
+
+  Exported CSVs now carry each term's case-sensitivity setting and open correctly in Excel,
+  so exporting and re-importing a glossary lands back on the rows it came from instead of
+  adding a second copy of every case-sensitive term. Files saved by Excel in a regional
+  encoding are read properly rather than imported as garbled text, and a quoted value
+  spanning two lines no longer turns into a stray "keep the original" rule.
+
+  The term count under a glossary now describes that glossary, and the 20,000-term limit —
+  which counts every glossary together — is shown with the glossary library, where it
+  applies. Running out of room says so in those terms instead of calling one glossary full.
+
+- [#2178](https://github.com/mengxi-ream/read-frog/pull/2178) [`02318d0`](https://github.com/mengxi-ream/read-frog/commit/02318d0aa4d8290684aa204108fba3f68c7e3a1e) Thanks [@mengxi-ream](https://github.com/mengxi-ream)! - fix(i18n): give the note suggestion feature one Chinese name
+
+  In Chinese the feature was 猜你想存 on the card and in the Built-in AI lists, but
+  保存建议 (儲存建議 in zh-TW) in the settings toggle, the command palette, and the
+  card's own on/off switch — so searching the settings for the name you saw on the page
+  turned up nothing ([#2176](https://github.com/mengxi-ream/read-frog/issues/2176)). All of them now read 猜你想存.
+
+- [#2171](https://github.com/mengxi-ream/read-frog/pull/2171) [`0f537ad`](https://github.com/mengxi-ream/read-frog/commit/0f537ad0ec2ec83edf23ad49b357c13250fe567a) Thanks [@ananaBMaster](https://github.com/ananaBMaster)! - chore(firefox): raise the minimum supported Firefox to 140
+
+  The manifest previously declared Firefox 112 as the floor, a value set when Firefox
+  first shipped MV3 and never revisited. The extension already calls `Intl.Segmenter`
+  on the page-translation path (`filter-small-paragraph.ts`), which requires Firefox
+  125, so the declared floor was not one the code could keep. Firefox 140 is a
+  currently supported ESR.
+
+- [#2177](https://github.com/mengxi-ream/read-frog/pull/2177) [`a250e6c`](https://github.com/mengxi-ream/read-frog/commit/a250e6c41f5460b6a8b28bbe6004b5c254307370) Thanks [@mengxi-ream](https://github.com/mengxi-ream)! - fix(translation): distinguish preserved names and code from foreign-language prose when skipping already-translated paragraphs
+
 ## 1.46.9
 
 ### Patch Changes
