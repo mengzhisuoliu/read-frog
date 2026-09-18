@@ -1,5 +1,11 @@
 # @read-frog/extension
 
+## 1.47.4
+
+### Patch Changes
+
+- [#2203](https://github.com/mengxi-ream/read-frog/pull/2203) [`3166b7f`](https://github.com/mengxi-ream/read-frog/commit/3166b7fcbf92e9f291129bd1a77e0a7b3568b158) Thanks [@ananaBMaster](https://github.com/ananaBMaster)! - style(providers): drop the sponsor badge from Atlas Cloud
+
 ## 1.47.3
 
 ### Patch Changes
