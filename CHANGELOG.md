@@ -1,5 +1,11 @@
 # @read-frog/extension
 
+## 1.49.0
+
+### Minor Changes
+
+- [#2202](https://github.com/mengxi-ream/read-frog/pull/2202) [`5048e54`](https://github.com/mengxi-ream/read-frog/commit/5048e542036efe8e107c605d573e5bb965584134) Thanks [@taiiiyang](https://github.com/taiiiyang)! - feat(subtitles): translate captions on x.com status videos
+
 ## 1.48.1
 
 ### Patch Changes
